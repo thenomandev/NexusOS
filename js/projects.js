@@ -184,7 +184,17 @@ function bindButtonActions() {
       const btn = project.buttons.find(x => x.id === id);
       if (!btn) return;
 
-      import("./app.js").then(m => m.openViewer(normalizeUrl(btn.url)));
+      const finalUrl = normalizeUrl(btn.url);
+
+fetch(finalUrl, { method: "HEAD", mode: "no-cors" })
+  .then(() => {
+    import("./app.js").then(m => m.openViewer(finalUrl));
+  })
+  .catch(() => {
+    window.open(finalUrl, "_blank");
+  });
+
+import("./app.js").then(m => m.openViewer(finalUrl));
     };
   });
 
