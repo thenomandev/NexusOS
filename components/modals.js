@@ -1,5 +1,6 @@
 export function openModal(content) {
   const root = document.getElementById("modalRoot");
+
   root.innerHTML = `
     <div class="modal-overlay">
       <div class="modal">
@@ -8,13 +9,16 @@ export function openModal(content) {
     </div>
   `;
 
-  root.querySelector(".modal-overlay").addEventListener("click", (e) => {
-    if (e.target.classList.contains("modal-overlay")) {
+  const overlay = root.querySelector(".modal-overlay");
+
+  overlay?.addEventListener("click", (e) => {
+    if (e.target === overlay) {
       closeModal();
     }
   });
 }
 
 export function closeModal() {
-  document.getElementById("modalRoot").innerHTML = "";
+  const root = document.getElementById("modalRoot");
+  if (root) root.innerHTML = "";
 }
