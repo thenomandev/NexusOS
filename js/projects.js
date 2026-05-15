@@ -387,7 +387,13 @@ export function renderTrustBin() {
 function updateStats() {
   const totalButtons = projects.reduce((sum, p) => sum + p.buttons.length, 0);
 
-  document.getElementById("totalProjectsCount").textContent = projects.length;
-  document.getElementById("totalButtonsCount").textContent = totalButtons;
-  document.getElementById("trashCount").textContent = projectTrash.length;
+  const projectsEl = document.getElementById("totalProjectsCount");
+  const buttonsEl = document.getElementById("totalButtonsCount");
+  const notesEl = document.getElementById("totalNotesCount");
+  const trashEl = document.getElementById("trashCount");
+
+  if (projectsEl) projectsEl.textContent = projects.length;
+  if (buttonsEl) buttonsEl.textContent = totalButtons;
+  if (notesEl) notesEl.textContent = "0";
+  if (trashEl) trashEl.textContent = projectTrash.length;
 }
