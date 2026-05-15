@@ -130,7 +130,32 @@ body{
 
 .header-actions{
   display:flex;
-  gap:10px;
+  gap:8px;
+  flex-shrink:0;
+}
+
+@media (max-width:480px){
+  .topbar{
+    gap:8px;
+  }
+
+  .brand h1{
+    font-size:15px;
+  }
+
+  .brand p{
+    font-size:11px;
+  }
+
+  .secondary-btn{
+    padding:10px 12px;
+    font-size:13px;
+  }
+
+  .primary-btn{
+    min-width:72px;
+    padding:0 14px;
+  }
 }
 
 .stats-grid{
