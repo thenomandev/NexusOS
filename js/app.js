@@ -13,65 +13,54 @@ const viewerScreen = document.getElementById("viewerScreen");
 
 const drawer = document.getElementById("sideDrawer");
 const overlay = document.getElementById("drawerOverlay");
-
 const viewerFrame = document.getElementById("viewerFrame");
 
-function showScreen(screen) {
-  document.querySelectorAll(".screen").forEach(s => {
-    s.classList.remove("active");
-  });
-
+function showScreen(screen){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   screen.classList.add("active");
 }
 
-function openDrawer() {
-  drawer.classList.add("active");
-  overlay.classList.add("active");
-}
-
-function closeDrawer() {
-  drawer.classList.remove("active");
-  overlay.classList.remove("active");
-}
-
-export function openProject(projectId) {
+export function openProject(projectId){
   setCurrentProject(projectId);
   renderButtons();
   showScreen(projectScreen);
 }
 
-export function openViewer(url) {
+export function openViewer(url){
   viewerFrame.src = url;
   showScreen(viewerScreen);
 }
 
-function backToDashboard() {
+document.getElementById("menuBtn")?.addEventListener("click", ()=>{
+  drawer.classList.add("active");
+  overlay.classList.add("active");
+});
+
+overlay?.addEventListener("click", ()=>{
+  drawer.classList.remove("active");
+  overlay.classList.remove("active");
+});
+
+document.getElementById("quickCreateBtn")?.addEventListener("click", createProject);
+document.getElementById("drawerCreateProject")?.addEventListener("click", createProject);
+
+document.getElementById("projectBackBtn")?.addEventListener("click", ()=>{
   showScreen(dashboardScreen);
-}
+});
 
-function backToProject() {
+document.getElementById("viewerBackBtn")?.addEventListener("click", ()=>{
   showScreen(projectScreen);
-}
+});
 
-document.getElementById("menuBtn").onclick = openDrawer;
-overlay.onclick = closeDrawer;
+document.getElementById("toggleViewBtn")?.addEventListener("click", toggleViewMode);
+document.getElementById("addButtonBtn")?.addEventListener("click", createButton);
 
-document.getElementById("quickCreateBtn").onclick = createProject;
-document.getElementById("drawerCreateProject").onclick = createProject;
-
-document.getElementById("projectBackBtn").onclick = backToDashboard;
-document.getElementById("viewerBackBtn").onclick = backToProject;
-
-document.getElementById("toggleViewBtn").onclick = toggleViewMode;
-document.getElementById("addButtonBtn").onclick = createButton;
-
-document.getElementById("projectSearch").addEventListener("input", (e) => {
+document.getElementById("projectSearch")?.addEventListener("input",(e)=>{
   renderProjects(e.target.value);
 });
 
-document.getElementById("viewerMenuBtn").onclick = () => {
+document.getElementById("viewerMenuBtn")?.addEventListener("click", ()=>{
   window.open(viewerFrame.src, "_blank");
-};
-
+});
 
 renderProjects();
