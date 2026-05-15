@@ -1,9 +1,9 @@
 export function genId() {
-  return Date.now() + Math.random().toString(36).slice(2);
+  return Date.now().toString() + Math.random().toString(36).slice(2);
 }
 
 export function sanitize(str = "") {
-  return str.replace(/[&<>"']/g, (m) => ({
+  return String(str).replace(/[&<>"']/g, (m) => ({
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",
@@ -16,7 +16,7 @@ export function saveLocal(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-export function loadLocal(key, fallback = null) {
+export function loadLocal(key, fallback = []) {
   try {
     const raw = localStorage.getItem(key);
     return raw ? JSON.parse(raw) : fallback;
@@ -25,11 +25,7 @@ export function loadLocal(key, fallback = null) {
   }
 }
 
-export function copyText(text) {
-  navigator.clipboard.writeText(text);
-}
-
-export function normalizeUrl(url) {
+export function normalizeUrl(url = "") {
   if (!/^https?:\/\//i.test(url)) {
     return "https://" + url;
   }
