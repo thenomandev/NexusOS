@@ -92,7 +92,7 @@ export function renderProjects(filter = "", targetId = "projectsGrid") {
 function bindProjectActions() {
   document.querySelectorAll(".project-card").forEach(card => {
     card.onclick = () => {
-      import("./app.js").then(m => m.openProject(card.dataset.projectId));
+      import("./app.js?v=100").then(m => m.openProject(card.dataset.projectId));
     };
   });
 
@@ -193,7 +193,7 @@ function bindButtonActions() {
 
       const finalUrl = normalizeUrl(btn.url);
 
-      import("./app.js").then(m => m.openViewer(finalUrl));
+      import("./app.js?v=100").then(m => m.openViewer(finalUrl));
     };
   });
 
@@ -207,6 +207,8 @@ function bindButtonActions() {
 
 function openButtonManage(id) {
   const project = getCurrentProject();
+  if (!project) return;
+
   const btn = project.buttons.find(x => x.id === id);
   if (!btn) return;
 
@@ -251,6 +253,8 @@ function editButton(btn) {
 
 function moveButtonToTrash(id) {
   const project = getCurrentProject();
+  if (!project) return;
+
   const idx = project.buttons.findIndex(x => x.id === id);
   if (idx === -1) return;
 
