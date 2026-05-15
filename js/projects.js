@@ -4,9 +4,11 @@ import { openModal, closeModal } from "../components/modals.js";
 
 const PROJECTS_KEY = "nexusos_projects";
 const TRASH_KEY = "nexusos_project_trash";
+const BUTTON_TRASH_KEY = "nexusos_button_trash";
 
 let projects = loadLocal(PROJECTS_KEY, []);
 let projectTrash = loadLocal(TRASH_KEY, []);
+let buttonTrash = loadLocal(BUTTON_TRASH_KEY, []);
 
 let currentProjectId = null;
 let gridMode = true;
@@ -14,6 +16,7 @@ let gridMode = true;
 function save() {
   saveLocal(PROJECTS_KEY, projects);
   saveLocal(TRASH_KEY, projectTrash);
+  saveLocal(BUTTON_TRASH_KEY, buttonTrash);
 }
 
 export function getProjects() {
@@ -66,8 +69,8 @@ export function createProject() {
   };
 }
 
-export function renderProjects(filter = "") {
-  const grid = document.getElementById("projectsGrid");
+export function renderProjects(filter = "", targetId = "projectsGrid") {
+  const grid = document.getElementById(targetId);
   if (!grid) return;
 
   let list = [...projects];
@@ -190,15 +193,7 @@ function bindButtonActions() {
 
       const finalUrl = normalizeUrl(btn.url);
 
-fetch(finalUrl, { method: "HEAD", mode: "no-cors" })
-  .then(() => {
-    import("./app.js").then(m => m.openViewer(finalUrl));
-  })
-  .catch(() => {
-    window.open(finalUrl, "_blank");
-  });
-
-import("./app.js").then(m => m.openViewer(finalUrl));
+      import("./app.js").then(m => m.openViewer(finalUrl));
     };
   });
 
@@ -259,7 +254,10 @@ function moveButtonToTrash(id) {
   const idx = project.buttons.findIndex(x => x.id === id);
   if (idx === -1) return;
 
-  project.buttonTrash.push(project.buttons[idx]);
+  buttonTrash.push({
+    ...project.buttons[idx],
+    projectName: project.name
+  });
   project.buttons.splice(idx, 1);
 
   save();
@@ -306,6 +304,84 @@ export function toggleViewMode() {
   gridMode = !gridMode;
   document.getElementById("toggleViewBtn").textContent = gridMode ? "List View" : "Grid View";
   renderButtons();
+}
+
+export function renderTrustBin() {
+  const screen = document.getElementById("trustBinScreen");
+  if (!screen) return;
+
+  let html = `
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-logo">🗑</div>
+        <div>
+          <h1>Trust Bin</h1>
+          <p>deleted projects & buttons</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  if (!projectTrash.length) {
+    html += `
+      <div class="coming-soon">
+        <h2>Empty Trust Bin</h2>
+        <p>No deleted projects</p>
+      </div>
+    `;
+  } else {
+    html += `<div class="projects-grid">`;
+
+    projectTrash.forEach((p, index) => {
+      html += `
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-info">
+              <div class="project-icon">${p.icon || "📁"}</div>
+              <div>
+                <div class="project-name">${p.name}</div>
+                <div class="project-meta">${p.buttons?.length || 0} buttons</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-actions" style="margin-top:12px;">
+            <button class="save-btn restore-project" data-index="${index}">
+              Restore
+            </button>
+
+            <button class="cancel-btn delete-forever" data-index="${index}">
+              Delete Permanently
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+  }
+
+  screen.innerHTML = html;
+
+  document.querySelectorAll(".restore-project").forEach(btn=>{
+    btn.onclick = ()=>{
+      const i = Number(btn.dataset.index);
+      projects.push(projectTrash[i]);
+      projectTrash.splice(i,1);
+      save();
+      renderTrustBin();
+      renderProjects();
+    };
+  });
+
+  document.querySelectorAll(".delete-forever").forEach(btn=>{
+    btn.onclick = ()=>{
+      const i = Number(btn.dataset.index);
+      projectTrash.splice(i,1);
+      save();
+      renderTrustBin();
+    };
+  });
 }
 
 function updateStats() {

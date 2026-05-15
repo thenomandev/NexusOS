@@ -4,10 +4,12 @@ import {
   setCurrentProject,
   renderButtons,
   createButton,
-  toggleViewMode
+  toggleViewMode,
+  renderTrustBin
 } from "./projects.js";
 
 const dashboardScreen = document.getElementById("dashboardScreen");
+const projectsTabScreen = document.getElementById("projectsTabScreen");
 const projectScreen = document.getElementById("projectScreen");
 const viewerScreen = document.getElementById("viewerScreen");
 
@@ -43,6 +45,7 @@ overlay?.addEventListener("click", ()=>{
 
 document.getElementById("quickCreateBtn")?.addEventListener("click", createProject);
 document.getElementById("drawerCreateProject")?.addEventListener("click", createProject);
+document.getElementById("projectsTabCreateBtn")?.addEventListener("click", createProject);
 
 document.getElementById("projectBackBtn")?.addEventListener("click", ()=>{
   showScreen(dashboardScreen);
@@ -84,7 +87,8 @@ navDashboard?.addEventListener("click", ()=>{
 });
 
 navProjects?.addEventListener("click", ()=>{
-  showScreen(dashboardScreen);
+  renderProjects("", "projectsTabGrid");
+  showScreen(projectsTabScreen);
   setActiveNav(navProjects);
 });
 
@@ -99,8 +103,12 @@ navWorkspace?.addEventListener("click", ()=>{
 });
 
 navTrash?.addEventListener("click", ()=>{
+  renderTrustBin();
   showScreen(document.getElementById("trustBinScreen"));
   setActiveNav(navTrash);
+});
+document.getElementById("projectsTabSearch")?.addEventListener("input",(e)=>{
+  renderProjects(e.target.value, "projectsTabGrid");
 });
 
 renderProjects();
