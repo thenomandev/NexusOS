@@ -63,4 +63,44 @@ document.getElementById("viewerMenuBtn")?.addEventListener("click", ()=>{
   window.open(viewerFrame.src, "_blank");
 });
 
+/* BOTTOM NAV */
+const navDashboard = document.getElementById("navDashboard");
+const navProjects = document.getElementById("navProjects");
+const navNotes = document.getElementById("navNotes");
+const navWorkspace = document.getElementById("navWorkspace");
+const navTrash = document.getElementById("navTrash");
+
+function setActiveNav(activeBtn){
+  document.querySelectorAll(".nav-btn").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  activeBtn.classList.add("active");
+}
+
+navDashboard?.addEventListener("click", ()=>{
+  showScreen(dashboardScreen);
+  setActiveNav(navDashboard);
+});
+
+navProjects?.addEventListener("click", ()=>{
+  showScreen(dashboardScreen);
+  setActiveNav(navProjects);
+});
+
+navNotes?.addEventListener("click", ()=>{
+  showScreen(document.getElementById("notesScreen"));
+  setActiveNav(navNotes);
+});
+
+navWorkspace?.addEventListener("click", ()=>{
+  showScreen(document.getElementById("ideScreen"));
+  setActiveNav(navWorkspace);
+});
+
+navTrash?.addEventListener("click", ()=>{
+  showScreen(document.getElementById("trustBinScreen"));
+  setActiveNav(navTrash);
+});
+
 renderProjects();
