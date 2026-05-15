@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NexusOS</title>
 
-  <link rel="manifest" href="../manifest.json">
-  <link rel="stylesheet" href="../css/main.css">
-  <link rel="stylesheet" href="../css/components.css">
+  <meta name="theme-color" content="#0b1220">
 
+  <link rel="manifest" href="../manifest.json">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/components.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -18,26 +19,6 @@
 </head>
 
 <body>
-
-<div id="modalRoot"></div>
-
-<div id="drawerOverlay"></div>
-
-<aside id="sideDrawer">
-  <div class="drawer-head">
-    <h2>NexusOS</h2>
-    <p>smart workspace</p>
-  </div>
-
-  <nav class="drawer-menu">
-    <button id="drawerCreateProject">Create Project</button>
-    <button id="drawerTrustBin">Project Trust Bin</button>
-    <button id="drawerBackup">Backup / Restore</button>
-    <button id="drawerNotes">Notes Book</button>
-    <button id="drawerWorkspace">Code Workspace</button>
-    <button id="drawerAbout">About</button>
-  </nav>
-</aside>
 
 <div id="app">
 
@@ -58,7 +39,7 @@
       </div>
 
       <button id="quickCreateBtn" class="primary-btn">
-        + New
+        <i class="fas fa-plus"></i>
       </button>
     </header>
 
@@ -74,18 +55,22 @@
       </div>
 
       <div class="stat-card">
-        <h3 id="trashCount">0</h3>
-        <p>Trust Bin</p>
+        <h3 id="totalNotesCount">0</h3>
+        <p>Notes</p>
       </div>
 
       <div class="stat-card">
-        <h3>V3</h3>
-        <p>NexusOS</p>
+        <h3 id="trashCount">0</h3>
+        <p>Trash</p>
       </div>
     </section>
 
     <section class="search-wrap">
-      <input id="projectSearch" type="text" placeholder="Search projects...">
+      <input
+        id="projectSearch"
+        type="text"
+        placeholder="Search projects..."
+      >
     </section>
 
     <section class="content-section">
@@ -98,7 +83,7 @@
 
   </section>
 
-  <!-- PROJECT -->
+  <!-- PROJECT VIEW -->
   <section id="projectScreen" class="screen">
 
     <header class="topbar">
@@ -116,22 +101,26 @@
 
       <div class="header-actions">
         <button id="toggleViewBtn" class="secondary-btn">
-          List
+          List View
         </button>
 
         <button id="addButtonBtn" class="primary-btn">
-          + Add
+          Add
         </button>
       </div>
     </header>
 
     <section class="search-wrap">
-      <input id="buttonSearch" type="text" placeholder="Search buttons...">
+      <input
+        id="buttonSearch"
+        type="text"
+        placeholder="Search buttons..."
+      >
     </section>
 
     <section class="content-section">
       <div class="section-head">
-        <h2>Buttons</h2>
+        <h2>All Buttons</h2>
       </div>
 
       <div id="buttonsGrid" class="buttons-grid"></div>
@@ -139,7 +128,7 @@
 
   </section>
 
-  <!-- VIEWER -->
+  <!-- WEBSITE VIEWER -->
   <section id="viewerScreen" class="screen">
 
     <header class="topbar">
@@ -155,8 +144,8 @@
         </div>
       </div>
 
-      <button id="viewerExternalBtn" class="icon-btn">
-        <i class="fas fa-up-right-from-square"></i>
+      <button id="viewerMenuBtn" class="icon-btn">
+        <i class="fas fa-bars"></i>
       </button>
     </header>
 
@@ -164,9 +153,50 @@
 
   </section>
 
+  <!-- NOTES -->
+  <section id="notesScreen" class="screen">
+    <div class="coming-soon">
+      <h2>Notes Book</h2>
+      <p>Coming in next file</p>
+    </div>
+  </section>
+
+  <!-- IDE -->
+  <section id="ideScreen" class="screen">
+    <div class="coming-soon">
+      <h2>Mini IDE</h2>
+      <p>Coming in next file</p>
+    </div>
+  </section>
+
 </div>
 
-<script type="module" src="../js/app.js?v=3"></script>
+<!-- SIDE DRAWER -->
+<div id="drawerOverlay"></div>
 
+<aside id="sideDrawer">
+
+  <div class="drawer-head">
+    <h2>NexusOS</h2>
+    <p>workspace menu</p>
+  </div>
+
+  <nav class="drawer-menu">
+    <button id="drawerCreateProject">Create Project</button>
+    <button id="drawerRenameProject">Edit Project Name</button>
+    <button id="drawerDeleteProject">Delete Project</button>
+    <button id="drawerProjectTrash">Project Trust Bin</button>
+    <button id="drawerBackup">Backup & Restore</button>
+    <button id="drawerNotes">Notes Book</button>
+    <button id="drawerIDE">Code Workspace</button>
+    <button id="drawerAbout">About</button>
+  </nav>
+
+</aside>
+
+<!-- GLOBAL MODAL ROOT -->
+<div id="modalRoot"></div>
+
+<script type="module" src="../js/app.js?v=5"></script>
 </body>
 </html>
