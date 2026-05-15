@@ -6,45 +6,56 @@ export function projectCard(project) {
       <div class="project-top">
 
         <div class="project-info">
-          <div class="project-icon">${project.icon || "📁"}</div>
-          <div class="project-name">${sanitize(project.name)}</div>
-          <div class="project-meta">
-            ${project.buttons?.length || 0} buttons
+          <div class="project-icon">
+            ${sanitize(project.icon || "📁")}
+          </div>
+
+          <div class="project-text">
+            <div class="project-name">
+              ${sanitize(project.name)}
+            </div>
+
+            <div class="project-meta">
+              ${project.buttons?.length || 0} buttons
+            </div>
           </div>
         </div>
 
-        <div class="mini-actions">
-          <button class="mini-btn rename-project" data-id="${project.id}">
-            ✏️
-          </button>
-
-          <button class="mini-btn delete-project" data-id="${project.id}">
-            🗑️
-          </button>
-
-          <button class="mini-btn pin-project" data-id="${project.id}">
-            📌
-          </button>
-        </div>
+        <button
+          class="manage-btn project-manage-btn"
+          data-project-manage="${project.id}"
+        >
+          ☰
+        </button>
 
       </div>
     </div>
   `;
 }
 
-export function buttonCard(button, index) {
-  const styles = ["", "alt1", "alt2", "alt3"];
-  const style = styles[index % styles.length];
-
+export function buttonCard(button, styleClass = "") {
   return `
-    <div class="button-card ${style}" data-button-id="${button.id}">
-      <div class="button-title">${sanitize(button.name)}</div>
-
-      <div class="button-actions">
-        <button class="manage-btn" data-id="${button.id}">
-          ☰
-        </button>
+    <div class="button-card ${styleClass}" data-button-id="${button.id}">
+      <div class="button-title">
+        ${sanitize(button.name)}
       </div>
+
+      <button
+        class="manage-btn button-manage-btn"
+        data-button-manage="${button.id}"
+      >
+        ☰
+      </button>
+    </div>
+  `;
+}
+
+export function emptyState(title, subtitle) {
+  return `
+    <div class="empty-card">
+      <div class="empty-icon">✨</div>
+      <h3>${sanitize(title)}</h3>
+      <p>${sanitize(subtitle)}</p>
     </div>
   `;
 }
