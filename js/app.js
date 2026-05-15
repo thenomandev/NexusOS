@@ -73,8 +73,5 @@ document.getElementById("viewerMenuBtn").onclick = () => {
   window.open(viewerFrame.src, "_blank");
 };
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("../service-worker.js");
-}
 
 renderProjects();
