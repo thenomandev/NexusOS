@@ -7,9 +7,9 @@
 
   <meta name="theme-color" content="#0b1220">
 
-  <link rel="manifest" href="../manifest.json">
-<link rel="stylesheet" href="../css/main.css">
-<link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/components.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -17,8 +17,8 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" defer></script>
 </head>
-
 <body>
+
 <div id="modalRoot"></div>
 
 <div id="app">
@@ -67,18 +67,13 @@
     </section>
 
     <section class="search-wrap">
-      <input
-        id="projectSearch"
-        type="text"
-        placeholder="Search projects..."
-      >
+      <input id="projectSearch" type="text" placeholder="Search projects...">
     </section>
 
     <section class="content-section">
       <div class="section-head">
         <h2>Projects</h2>
       </div>
-
       <div id="projectsGrid" class="projects-grid"></div>
     </section>
 
@@ -86,7 +81,6 @@
 
   <!-- PROJECTS TAB -->
   <section id="projectsTabScreen" class="screen">
-
     <header class="topbar">
       <button id="projectsTabCreateBtn" class="icon-btn">
         <i class="fas fa-plus"></i>
@@ -102,25 +96,19 @@
     </header>
 
     <section class="search-wrap">
-      <input
-        id="projectsTabSearch"
-        type="text"
-        placeholder="Search projects..."
-      >
+      <input id="projectsTabSearch" type="text" placeholder="Search projects...">
     </section>
 
     <section class="content-section">
       <div id="projectsTabGrid" class="projects-grid"></div>
     </section>
-
   </section>
 
   <!-- PROJECT VIEW -->
   <section id="projectScreen" class="screen">
-
     <header class="topbar">
       <button id="projectBackBtn" class="icon-btn">
-        <i class="fas fa-home"></i>
+        <i class="fas fa-arrow-left"></i>
       </button>
 
       <div class="brand">
@@ -131,38 +119,22 @@
         </div>
       </div>
 
-      <div class="header-actions">
-        <button id="toggleViewBtn" class="secondary-btn">
-          List View
-        </button>
-
-        <button id="addButtonBtn" class="primary-btn">
-          Add
-        </button>
-      </div>
+      <button id="addButtonBtn" class="primary-btn">
+        Add
+      </button>
     </header>
 
     <section class="search-wrap">
-      <input
-        id="buttonSearch"
-        type="text"
-        placeholder="Search buttons..."
-      >
+      <input id="buttonSearch" type="text" placeholder="Search buttons...">
     </section>
 
     <section class="content-section">
-      <div class="section-head">
-        <h2>All Buttons</h2>
-      </div>
-
       <div id="buttonsGrid" class="buttons-grid"></div>
     </section>
-
   </section>
 
-  <!-- WEBSITE VIEWER -->
+  <!-- VIEWER -->
   <section id="viewerScreen" class="screen">
-
     <header class="topbar">
       <button id="viewerBackBtn" class="icon-btn">
         <i class="fas fa-arrow-left"></i>
@@ -177,39 +149,47 @@
       </div>
 
       <button id="viewerMenuBtn" class="icon-btn">
-        <i class="fas fa-bars"></i>
+        <i class="fas fa-up-right-from-square"></i>
       </button>
     </header>
 
     <iframe id="viewerFrame"></iframe>
-
   </section>
 
   <!-- NOTES -->
   <section id="notesScreen" class="screen">
     <div class="coming-soon">
       <h2>Notes Book</h2>
-      <p>Coming in next file</p>
+      <p>Coming soon</p>
     </div>
   </section>
 
-  <!-- IDE -->
+  <!-- WORKSPACE -->
   <section id="ideScreen" class="screen">
     <div class="coming-soon">
-      <h2>Mini IDE</h2>
-      <p>Coming in next file</p>
+      <h2>Code Workspace</h2>
+      <p>Coming soon</p>
     </div>
   </section>
 
   <!-- TRUST BIN -->
   <section id="trustBinScreen" class="screen">
-    <div class="coming-soon">
-      <h2>Trust Bin</h2>
-      <p>Deleted projects will appear here</p>
-    </div>
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-logo">🗑️</div>
+        <div>
+          <h1>Trust Bin</h1>
+          <p>deleted projects</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="content-section">
+      <div id="trustBinGrid" class="projects-grid"></div>
+    </section>
   </section>
 
-<!-- BOTTOM NAV -->
+  <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
     <button id="navDashboard" class="nav-btn active">
       <i class="fas fa-house"></i>
@@ -239,11 +219,10 @@
 
 </div>
 
-<!-- SIDE DRAWER -->
+<!-- DRAWER -->
 <div id="drawerOverlay"></div>
 
 <aside id="sideDrawer">
-
   <div class="drawer-head">
     <h2>NexusOS</h2>
     <p>workspace menu</p>
@@ -251,17 +230,10 @@
 
   <nav class="drawer-menu">
     <button id="drawerCreateProject">Create Project</button>
-    <button id="drawerRenameProject">Edit Project Name</button>
-    <button id="drawerDeleteProject">Delete Project</button>
-    <button id="drawerProjectTrash">Project Trust Bin</button>
-    <button id="drawerBackup">Backup & Restore</button>
-    <button id="drawerNotes">Notes Book</button>
-    <button id="drawerIDE">Code Workspace</button>
-    <button id="drawerAbout">About</button>
   </nav>
-
 </aside>
 
-<script type="module" src="../js/app.js?v=5"></script>
+<script type="module" src="./js/app.js"></script>
+
 </body>
 </html>
